@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* Dark mode dikontrol class "dark" pada <html> (next-themes) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Token warna ----------
+   Latar putih (light) / gelap (dark). Pastel hanya dipakai sebagai aksen:
+   ikon, badge, emoji, progress. */
+:root {
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f7f7fa;
+  --border: #ececf2;
+  --foreground: #1c1f2b;
+  --muted: #6c7283;
+  --ring: #cbbff7;
+
+  --pink-soft: #ffe4ee;
+  --pink-ink: #c2417a;
+  --mint-soft: #dcf6e9;
+  --mint-ink: #1d8a5f;
+  --lavender-soft: #ece8ff;
+  --lavender-ink: #6a54c8;
+  --peach-soft: #ffe9db;
+  --peach-ink: #c1622b;
+  --sky-soft: #ddf0ff;
+  --sky-ink: #2b78b3;
+  --lemon-soft: #fff5cc;
+  --lemon-ink: #97780a;
+  --red-soft: #ffe2e2;
+  --red-ink: #c23535;
+
+  --chart-income: #5fd0a3;
+  --chart-expense: #f58db1;
+  --chart-line: #8f7bec;
+}
+
+.dark {
+  --background: #0e0f14;
+  --surface: #161821;
+  --surface-2: #1c1f2a;
+  --border: #272a37;
+  --foreground: #eceef5;
+  --muted: #9298ab;
+  --ring: #6a5bb5;
+
+  --pink-soft: rgba(255, 150, 190, 0.14);
+  --pink-ink: #ffa8c8;
+  --mint-soft: rgba(110, 220, 170, 0.14);
+  --mint-ink: #7fe0b3;
+  --lavender-soft: rgba(165, 145, 255, 0.16);
+  --lavender-ink: #bdaeff;
+  --peach-soft: rgba(255, 170, 120, 0.14);
+  --peach-ink: #ffb78a;
+  --sky-soft: rgba(110, 190, 255, 0.14);
+  --sky-ink: #8ccbff;
+  --lemon-soft: rgba(255, 220, 90, 0.13);
+  --lemon-ink: #f2d765;
+  --red-soft: rgba(255, 120, 120, 0.14);
+  --red-ink: #ff9b9b;
+
+  --chart-income: #6fe0b0;
+  --chart-expense: #ff9fc0;
+  --chart-line: #b3a3ff;
+}
+
+@theme inline {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-ring: var(--ring);
+
+  --color-pink-soft: var(--pink-soft);
+  --color-pink-ink: var(--pink-ink);
+  --color-mint-soft: var(--mint-soft);
+  --color-mint-ink: var(--mint-ink);
+  --color-lavender-soft: var(--lavender-soft);
+  --color-lavender-ink: var(--lavender-ink);
+  --color-peach-soft: var(--peach-soft);
+  --color-peach-ink: var(--peach-ink);
+  --color-sky-soft: var(--sky-soft);
+  --color-sky-ink: var(--sky-ink);
+  --color-lemon-soft: var(--lemon-soft);
+  --color-lemon-ink: var(--lemon-ink);
+  --color-red-soft: var(--red-soft);
+  --color-red-ink: var(--red-ink);
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--lavender-soft);
+  color: var(--lavender-ink);
+}
+
+/* Scrollbar tipis */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* Animasi halus */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* fill-mode "backwards" (bukan "both"): setelah animasi selesai tidak ada transform yang tersisa,
+   sehingga elemen "fixed" di dalamnya tidak ikut terikat ke pembungkus ini */
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out backwards;
+}
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in {
+    animation: none;
+  }
+}
+
+/* Safe area untuk bottom nav di HP */
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
